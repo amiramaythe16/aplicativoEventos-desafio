@@ -19,8 +19,12 @@
 		EBBBF628280E15DD00E73618 /* Aplicativo_Eventos___DesafioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF627280E15DD00E73618 /* Aplicativo_Eventos___DesafioUITests.swift */; };
 		EBBBF62A280E15DD00E73618 /* Aplicativo_Eventos___DesafioUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF629280E15DD00E73618 /* Aplicativo_Eventos___DesafioUITestsLaunchTests.swift */; };
 		EBBBF63D280E35CE00E73618 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF63C280E35CE00E73618 /* Enums.swift */; };
-		EBBBF63F280E366E00E73618 /* TelaPrincipalEventosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF63E280E366E00E73618 /* TelaPrincipalEventosView.swift */; };
 		EBBBF641280E3B2200E73618 /* TelaPrincipalEventosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF640280E3B2200E73618 /* TelaPrincipalEventosViewController.swift */; };
+		EBBBF643280EE51F00E73618 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF642280EE51F00E73618 /* Extensions.swift */; };
+		EBBBF646280EEB3900E73618 /* CustomEventoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF645280EEB3900E73618 /* CustomEventoTableViewCell.swift */; };
+		EBBBF649280EF0F000E73618 /* TelaPrincipalEventosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF648280EF0F000E73618 /* TelaPrincipalEventosModel.swift */; };
+		EBBBF64B280EFDAF00E73618 /* TelaDetalheEventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF64A280EFDAF00E73618 /* TelaDetalheEventoViewController.swift */; };
+		EBBBF64D280F03D400E73618 /* TelaPrincipalEventosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF64C280F03D400E73618 /* TelaPrincipalEventosView.swift */; };
 		F02B2C8FC65211615B3A4146 /* Pods_Aplicativo_Eventos___DesafioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E42376761D131EB4930CCF0 /* Pods_Aplicativo_Eventos___DesafioTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,8 +69,12 @@
 		EBBBF627280E15DD00E73618 /* Aplicativo_Eventos___DesafioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aplicativo_Eventos___DesafioUITests.swift"; sourceTree = "<group>"; };
 		EBBBF629280E15DD00E73618 /* Aplicativo_Eventos___DesafioUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aplicativo_Eventos___DesafioUITestsLaunchTests.swift"; sourceTree = "<group>"; };
 		EBBBF63C280E35CE00E73618 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		EBBBF63E280E366E00E73618 /* TelaPrincipalEventosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPrincipalEventosView.swift; sourceTree = "<group>"; };
 		EBBBF640280E3B2200E73618 /* TelaPrincipalEventosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPrincipalEventosViewController.swift; sourceTree = "<group>"; };
+		EBBBF642280EE51F00E73618 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		EBBBF645280EEB3900E73618 /* CustomEventoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEventoTableViewCell.swift; sourceTree = "<group>"; };
+		EBBBF648280EF0F000E73618 /* TelaPrincipalEventosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPrincipalEventosModel.swift; sourceTree = "<group>"; };
+		EBBBF64A280EFDAF00E73618 /* TelaDetalheEventoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDetalheEventoViewController.swift; sourceTree = "<group>"; };
+		EBBBF64C280F03D400E73618 /* TelaPrincipalEventosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPrincipalEventosView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +153,7 @@
 		EBBBF605280E15D800E73618 /* Aplicativo Eventos - Desafio */ = {
 			isa = PBXGroup;
 			children = (
+				EBBBF647280EF0C000E73618 /* Model */,
 				EBBBF63B280E358A00E73618 /* Util */,
 				EBBBF63A280E358400E73618 /* Presenter */,
 				EBBBF639280E357E00E73618 /* Service */,
@@ -181,7 +190,8 @@
 		EBBBF636280E356500E73618 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				EBBBF63E280E366E00E73618 /* TelaPrincipalEventosView.swift */,
+				EBBBF644280EEB1400E73618 /* Cell */,
+				EBBBF64C280F03D400E73618 /* TelaPrincipalEventosView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -190,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				EBBBF640280E3B2200E73618 /* TelaPrincipalEventosViewController.swift */,
+				EBBBF64A280EFDAF00E73618 /* TelaDetalheEventoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -212,8 +223,25 @@
 			isa = PBXGroup;
 			children = (
 				EBBBF63C280E35CE00E73618 /* Enums.swift */,
+				EBBBF642280EE51F00E73618 /* Extensions.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		EBBBF644280EEB1400E73618 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				EBBBF645280EEB3900E73618 /* CustomEventoTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		EBBBF647280EF0C000E73618 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EBBBF648280EF0F000E73618 /* TelaPrincipalEventosModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -456,11 +484,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBBBF641280E3B2200E73618 /* TelaPrincipalEventosViewController.swift in Sources */,
+				EBBBF64B280EFDAF00E73618 /* TelaDetalheEventoViewController.swift in Sources */,
+				EBBBF646280EEB3900E73618 /* CustomEventoTableViewCell.swift in Sources */,
 				EBBBF60B280E15D800E73618 /* ViewController.swift in Sources */,
+				EBBBF64D280F03D400E73618 /* TelaPrincipalEventosView.swift in Sources */,
 				EBBBF607280E15D800E73618 /* AppDelegate.swift in Sources */,
 				EBBBF63D280E35CE00E73618 /* Enums.swift in Sources */,
 				EBBBF609280E15D800E73618 /* SceneDelegate.swift in Sources */,
-				EBBBF63F280E366E00E73618 /* TelaPrincipalEventosView.swift in Sources */,
+				EBBBF649280EF0F000E73618 /* TelaPrincipalEventosModel.swift in Sources */,
+				EBBBF643280EE51F00E73618 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +676,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -671,6 +704,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
