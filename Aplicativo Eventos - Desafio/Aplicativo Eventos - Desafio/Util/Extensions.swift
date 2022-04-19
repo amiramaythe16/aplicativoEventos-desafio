@@ -35,3 +35,16 @@ extension UIImageView {
         self.clipsToBounds = true
     }
 }
+
+extension UILabel {
+    func numeroDeLinhas(width: CGFloat) -> Int {
+        guard let myText = self.text as NSString? else { return 0 }
+
+        let rect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let labelSize = myText.boundingRect(
+            with: rect, options: .usesLineFragmentOrigin,
+            attributes: [NSAttributedString.Key.font: self.font ?? UIFont()], context: nil)
+
+            return Int(ceil(CGFloat(labelSize.height) / self.font.lineHeight))
+    }
+}

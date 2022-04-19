@@ -21,6 +21,13 @@ class TelaDetalheEventoView: UIView, CodableView {
     var stackViewBotoes: UIStackView
     
     var descricao: UILabel
+    var botaoLerMais: UIButton
+    
+    fileprivate var descricaoExpandido: Bool = false
+    
+    fileprivate var quantidadeDeLinhas: Int {
+        return self.descricao.numeroDeLinhas(width: UIScreen.main.bounds.width)
+    }
     
     override init(frame: CGRect) {
         self.imagem = UIImageView()
@@ -35,6 +42,7 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.stackViewBotoes = UIStackView(arrangedSubviews: [botaoCheckin, botaoCompartilhar])
         
         self.descricao = UILabel()
+        self.botaoLerMais = UIButton()
         
         super.init(frame: frame)
         setupView()
@@ -94,9 +102,22 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.descricao.font = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.regular)
         self.descricao.textColor = UIColor(hex: "3A4859")
         self.descricao.textAlignment = .left
-        self.descricao.numberOfLines = .zero
+        self.descricao.numberOfLines = 10
         self.descricao.text = "O Patas Dadas estará na Redenção, nesse domingo, com cães para adoção e produtos à venda!\n\nNa ocasião, teremos bottons, bloquinhos e camisetas!\n\nTraga seu Pet, os amigos e o chima, e venha aproveitar esse dia de sol com a gente e com alguns de nossos peludinhos - que estarão prontinhos para ganhar o ♥ de um humano bem legal pra chamar de seu. \n\nAceitaremos todos os tipos de doação:\n- guias e coleiras em bom estado\n- ração (as que mais precisamos no momento são sênior e filhote)\n- roupinhas \n- cobertas \n- remédios dentro do prazo de validade"
+        
+        self.botaoLerMais.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: UIFont.Weight.regular)
+        self.botaoLerMais.setTitle("Ler mais", for: .normal)
+        self.botaoLerMais.setTitleColor(UIColor(hex: "005CA9"), for: .normal)
+        self.botaoLerMais.backgroundColor = .white
+        self.botaoLerMais.addTarget(self, action: #selector(clicouEmVerMais), for: .touchUpInside)
+        self.botaoLerMais.isHidden = true
+        
     
+    }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        self.botaoLerMais.isHidden = !(quantidadeDeLinhas > 10)
     }
     
     func buildViews() {
@@ -104,6 +125,7 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.addSubview(stackViewDetalhe)
         self.addSubview(stackViewBotoes)
         self.addSubview(descricao)
+        self.addSubview(botaoLerMais)
     }
     
     func setupConstraints() {
@@ -125,9 +147,14 @@ class TelaDetalheEventoView: UIView, CodableView {
         }
         
         self.descricao.snp.makeConstraints { make in
-            make.top.equalTo(stackViewBotoes.snp.bottom).inset(16.0)
+            make.top.equalTo(stackViewBotoes.snp.bottom).offset(16.0)
             make.leading.trailing.equalToSuperview().inset(16.0)
-            make.bottom.equalToSuperview().inset(8.0)
+        }
+        
+        self.botaoLerMais.snp.makeConstraints { make in
+            make.top.equalTo(descricao.snp.bottom).offset(16.0)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(self.descricao.font.lineHeight)
         }
         
         self.botaoCheckin.snp.makeConstraints { make in
@@ -139,6 +166,11 @@ class TelaDetalheEventoView: UIView, CodableView {
         }
     }
     
-
-
+    @objc func clicouEmVerMais() {
+        UIView.animate(withDuration: 0.15) { [weak self] in
+            self?.descricao.numberOfLines = self?.descricaoExpandido ?? false ? 10 : 0
+            self?.botaoLerMais.setTitle(self?.descricaoExpandido ?? false ? "Ler mais" : "Ler menos", for: .normal)
+            self?.descricaoExpandido.toggle()
+        }
+    }
 }
