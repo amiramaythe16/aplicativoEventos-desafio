@@ -25,6 +25,7 @@
 		EBBBF649280EF0F000E73618 /* TelaPrincipalEventosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF648280EF0F000E73618 /* TelaPrincipalEventosModel.swift */; };
 		EBBBF64B280EFDAF00E73618 /* TelaDetalheEventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF64A280EFDAF00E73618 /* TelaDetalheEventoViewController.swift */; };
 		EBBBF64D280F03D400E73618 /* TelaPrincipalEventosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF64C280F03D400E73618 /* TelaPrincipalEventosView.swift */; };
+		EBBBF64F280F086F00E73618 /* TelaDetalheEventoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF64E280F086E00E73618 /* TelaDetalheEventoView.swift */; };
 		F02B2C8FC65211615B3A4146 /* Pods_Aplicativo_Eventos___DesafioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E42376761D131EB4930CCF0 /* Pods_Aplicativo_Eventos___DesafioTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		EBBBF648280EF0F000E73618 /* TelaPrincipalEventosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPrincipalEventosModel.swift; sourceTree = "<group>"; };
 		EBBBF64A280EFDAF00E73618 /* TelaDetalheEventoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDetalheEventoViewController.swift; sourceTree = "<group>"; };
 		EBBBF64C280F03D400E73618 /* TelaPrincipalEventosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPrincipalEventosView.swift; sourceTree = "<group>"; };
+		EBBBF64E280F086E00E73618 /* TelaDetalheEventoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDetalheEventoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 			children = (
 				EBBBF644280EEB1400E73618 /* Cell */,
 				EBBBF64C280F03D400E73618 /* TelaPrincipalEventosView.swift */,
+				EBBBF64E280F086E00E73618 /* TelaDetalheEventoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				EBBBF641280E3B2200E73618 /* TelaPrincipalEventosViewController.swift in Sources */,
 				EBBBF64B280EFDAF00E73618 /* TelaDetalheEventoViewController.swift in Sources */,
 				EBBBF646280EEB3900E73618 /* CustomEventoTableViewCell.swift in Sources */,
+				EBBBF64F280F086F00E73618 /* TelaDetalheEventoView.swift in Sources */,
 				EBBBF60B280E15D800E73618 /* ViewController.swift in Sources */,
 				EBBBF64D280F03D400E73618 /* TelaPrincipalEventosView.swift in Sources */,
 				EBBBF607280E15D800E73618 /* AppDelegate.swift in Sources */,
