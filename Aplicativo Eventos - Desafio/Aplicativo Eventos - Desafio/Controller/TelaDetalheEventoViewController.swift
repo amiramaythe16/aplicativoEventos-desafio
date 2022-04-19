@@ -9,9 +9,11 @@ import UIKit
 
 class TelaDetalheEventoViewController: UIViewController {
 
+    var telaDetalheView = TelaDetalheEventoView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view = telaDetalheView
     }
     
 

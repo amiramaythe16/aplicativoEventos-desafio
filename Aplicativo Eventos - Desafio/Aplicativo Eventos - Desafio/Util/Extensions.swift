@@ -29,3 +29,9 @@ extension UIColor {
     }
 }
 
+extension UIImageView {
+    func roundedImage() {
+        self.layer.cornerRadius = self.frame.size.height / 2
+        self.clipsToBounds = true
+    }
+}
