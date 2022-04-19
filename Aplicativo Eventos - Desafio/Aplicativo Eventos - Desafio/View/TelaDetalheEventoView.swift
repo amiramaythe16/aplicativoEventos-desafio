@@ -8,6 +8,9 @@
 import UIKit
 
 class TelaDetalheEventoView: UIView, CodableView {
+    
+    var imagem: UIImageView
+    
     func setupComponents() {
         
     }
