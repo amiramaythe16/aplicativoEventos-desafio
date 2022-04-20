@@ -36,19 +36,6 @@ extension UIImageView {
     }
 }
 
-extension UILabel {
-    func numeroDeLinhas(width: CGFloat) -> Int {
-        guard let myText = self.text as NSString? else { return 0 }
-
-        let rect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        let labelSize = myText.boundingRect(
-            with: rect, options: .usesLineFragmentOrigin,
-            attributes: [NSAttributedString.Key.font: self.font ?? UIFont()], context: nil)
-
-            return Int(ceil(CGFloat(labelSize.height) / self.font.lineHeight))
-    }
-}
-
 extension Date {
     var millisecondsSince1970: Int64 {
         Int64((self.timeIntervalSince1970 * 1000.0).rounded())
@@ -64,4 +51,38 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+}
+
+extension UIImageView{
+    
+    public func loadImageUsingUrlString(urlString: String?) {
+        let url = URL(string: urlString ?? "")!
+        
+        let dataTask = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+            guard let self = self else { return }
+            if let data = data {
+                DispatchQueue.main.async {
+                    self.image = UIImage(data: data)
+                }
+            } else {
+                print(error?.localizedDescription ?? "--")
+            }
+        }
+        dataTask.resume()
+    }
+}
+
+
+extension NumberFormatter {
+    
+    static func formatadorMoeda(tipoMoeda: String = "pt_BR") -> NumberFormatter{
+        
+         let formatadorMoeda: NumberFormatter = {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            formatter.locale = Locale(identifier: tipoMoeda)
+            return formatter
+        }()
+        return formatadorMoeda
+    }
 }

@@ -20,14 +20,14 @@ class TelaDetalheEventoView: UIView, CodableView {
     var botaoCompartilhar: UIButton
     var stackViewBotoes: UIStackView
     
-    var descricao: UILabel
-    var botaoLerMais: UIButton
-    
-    fileprivate var descricaoExpandido: Bool = false
-    
-    fileprivate var quantidadeDeLinhas: Int {
-        return self.descricao.numeroDeLinhas(width: UIScreen.main.bounds.width)
-    }
+    var tableView: UITableView
+
+    let formatadorMoeda: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "pt_BR")
+        return formatter
+    }()
     
     override init(frame: CGRect) {
         self.imagem = UIImageView()
@@ -41,9 +41,7 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.botaoCompartilhar = UIButton()
         self.stackViewBotoes = UIStackView(arrangedSubviews: [botaoCheckin, botaoCompartilhar])
         
-        self.descricao = UILabel()
-        self.botaoLerMais = UIButton()
-        
+        self.tableView = UITableView()
         super.init(frame: frame)
         
         setupView()
@@ -57,11 +55,10 @@ class TelaDetalheEventoView: UIView, CodableView {
         DispatchQueue.main.async {
             self.imagem.loadImageUsingUrlString(urlString: detalheEvento.image)
             self.titulo.text = detalheEvento.title
-            self.labelPreco.text = String(detalheEvento.price ?? .zero)
-            
+            self.labelPreco.text = self.formatadorMoeda.string(from: NSNumber(value: detalheEvento.price ?? .zero))
+    
             let dataFormatada = Date(milliseconds: Int64(detalheEvento.date ?? .zero))
             self.labelData.text = dataFormatada.string(withFormat: "dd/MM/yyyy")
-            self.descricao.text = detalheEvento.description
         }
     }
 
@@ -109,32 +106,17 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.stackViewBotoes.axis = .horizontal
         self.stackViewBotoes.spacing = 8
         
-        self.descricao.font = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.regular)
-        self.descricao.textColor = UIColor(hex: "3A4859")
-        self.descricao.textAlignment = .left
-        self.descricao.numberOfLines = 10
-        
-        self.botaoLerMais.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: UIFont.Weight.regular)
-        self.botaoLerMais.setTitle("Ler mais", for: .normal)
-        self.botaoLerMais.setTitleColor(UIColor(hex: "005CA9"), for: .normal)
-        self.botaoLerMais.backgroundColor = .white
-        self.botaoLerMais.addTarget(self, action: #selector(clicouEmVerMais), for: .touchUpInside)
-        self.botaoLerMais.isHidden = true
-        
-    
+        self.tableView.backgroundColor = .clear
+        self.tableView.separatorStyle = .none
+
     }
     
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        self.botaoLerMais.isHidden = !(quantidadeDeLinhas > 10)
-    }
     
     func buildViews() {
         self.addSubview(imagem)
         self.addSubview(stackViewDetalhe)
         self.addSubview(stackViewBotoes)
-        self.addSubview(descricao)
-        self.addSubview(botaoLerMais)
+        self.addSubview(tableView)
     }
     
     func setupConstraints() {
@@ -151,19 +133,14 @@ class TelaDetalheEventoView: UIView, CodableView {
         }
         
         self.stackViewBotoes.snp.makeConstraints { make in
-            make.top.equalTo(stackViewDetalhe.snp.bottom).offset(16.0)
+            make.top.equalTo(stackViewDetalhe.snp.bottom).offset(20.0)
             make.leading.trailing.equalToSuperview().inset(16.0)
         }
         
-        self.descricao.snp.makeConstraints { make in
+        self.tableView.snp.makeConstraints { make in
             make.top.equalTo(stackViewBotoes.snp.bottom).offset(16.0)
-            make.leading.trailing.equalToSuperview().inset(16.0)
-        }
-        
-        self.botaoLerMais.snp.makeConstraints { make in
-            make.top.equalTo(descricao.snp.bottom).offset(16.0)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(self.descricao.font.lineHeight)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(8.0)
         }
         
         self.botaoCheckin.snp.makeConstraints { make in
@@ -174,12 +151,5 @@ class TelaDetalheEventoView: UIView, CodableView {
             make.height.equalTo(32.0)
         }
     }
-    
-    @objc func clicouEmVerMais() {
-        UIView.animate(withDuration: 0.15) { [weak self] in
-            self?.descricao.numberOfLines = self?.descricaoExpandido ?? false ? 10 : 0
-            self?.botaoLerMais.setTitle(self?.descricaoExpandido ?? false ? "Ler mais" : "Ler menos", for: .normal)
-            self?.descricaoExpandido.toggle()
-        }
-    }
+
 }
