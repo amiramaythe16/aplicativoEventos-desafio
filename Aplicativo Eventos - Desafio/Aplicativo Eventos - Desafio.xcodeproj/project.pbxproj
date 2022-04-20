@@ -26,6 +26,8 @@
 		EBBBF64B280EFDAF00E73618 /* TelaDetalheEventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF64A280EFDAF00E73618 /* TelaDetalheEventoViewController.swift */; };
 		EBBBF64D280F03D400E73618 /* TelaPrincipalEventosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF64C280F03D400E73618 /* TelaPrincipalEventosView.swift */; };
 		EBBBF64F280F086F00E73618 /* TelaDetalheEventoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF64E280F086E00E73618 /* TelaDetalheEventoView.swift */; };
+		EBBBF651280F67B700E73618 /* ServiceEvento.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF650280F67B700E73618 /* ServiceEvento.swift */; };
+		EBBBF653280F6D8700E73618 /* EventosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBBF652280F6D8700E73618 /* EventosPresenter.swift */; };
 		F02B2C8FC65211615B3A4146 /* Pods_Aplicativo_Eventos___DesafioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E42376761D131EB4930CCF0 /* Pods_Aplicativo_Eventos___DesafioTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +79,8 @@
 		EBBBF64A280EFDAF00E73618 /* TelaDetalheEventoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDetalheEventoViewController.swift; sourceTree = "<group>"; };
 		EBBBF64C280F03D400E73618 /* TelaPrincipalEventosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPrincipalEventosView.swift; sourceTree = "<group>"; };
 		EBBBF64E280F086E00E73618 /* TelaDetalheEventoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDetalheEventoView.swift; sourceTree = "<group>"; };
+		EBBBF650280F67B700E73618 /* ServiceEvento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceEvento.swift; sourceTree = "<group>"; };
+		EBBBF652280F6D8700E73618 /* EventosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventosPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +215,7 @@
 		EBBBF639280E357E00E73618 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				EBBBF650280F67B700E73618 /* ServiceEvento.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 		EBBBF63A280E358400E73618 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				EBBBF652280F6D8700E73618 /* EventosPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -490,8 +496,10 @@
 				EBBBF64B280EFDAF00E73618 /* TelaDetalheEventoViewController.swift in Sources */,
 				EBBBF646280EEB3900E73618 /* CustomEventoTableViewCell.swift in Sources */,
 				EBBBF64F280F086F00E73618 /* TelaDetalheEventoView.swift in Sources */,
+				EBBBF651280F67B700E73618 /* ServiceEvento.swift in Sources */,
 				EBBBF60B280E15D800E73618 /* ViewController.swift in Sources */,
 				EBBBF64D280F03D400E73618 /* TelaPrincipalEventosView.swift in Sources */,
+				EBBBF653280F6D8700E73618 /* EventosPresenter.swift in Sources */,
 				EBBBF607280E15D800E73618 /* AppDelegate.swift in Sources */,
 				EBBBF63D280E35CE00E73618 /* Enums.swift in Sources */,
 				EBBBF609280E15D800E73618 /* SceneDelegate.swift in Sources */,

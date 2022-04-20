@@ -45,9 +45,9 @@ class CustomEventoTableViewCell: UITableViewCell, CodableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func bind(detalheEvento: DetalheEvento) {
-        self.titulo.text = detalheEvento.tituloEvento
-        self.dataEvento.text = detalheEvento.labelData
+    func bind(detalheEvento: BodyResponseEvento) {
+        self.titulo.text = detalheEvento.title
+        self.dataEvento.text = String(detalheEvento.date ?? .zero)
         
         self.setupView()
     }

@@ -52,6 +52,11 @@ class TelaDetalheEventoView: UIView, CodableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func bind(detalheEvento: BodyResponseEvento) {
+       // self.imagem.image = UIImag
+        self.titulo.text = detalheEvento.title
+    }
+    
     func setupComponents() {
         self.backgroundColor = .white
         

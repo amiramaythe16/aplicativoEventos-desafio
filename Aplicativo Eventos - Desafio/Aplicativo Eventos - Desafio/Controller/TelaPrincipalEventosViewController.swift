@@ -10,21 +10,18 @@ import UIKit
 class TelaPrincipalEventosViewController: UIViewController {
 
     var telaPrincialEventosView = TelaPrincipalEventosView()
+    var presenter: EventosPresenter?
     
-    var dadosEvento = [DetalheEvento]()
-    
-    var dadoDoEvento = [DetalheEvento(tituloEvento: "Feira de adoção de animais na Redenção", labelData: "12/01/2022"),
-                        DetalheEvento(tituloEvento: "Doação de roupas", labelData: "12/01/2022"),
-                        DetalheEvento(tituloEvento: "Feira de Troca de Livros", labelData: "12/01/2022") ]
-    
-    
+    var dadosEvento = [BodyResponseEvento]()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = telaPrincialEventosView
         self.configuraComponentes()
-        self.dadosEvento.append(contentsOf: self.dadoDoEvento)
+        self.presenter = EventosPresenter(output: self)
+        self.presenter?.consultaEvento()
     }
-    
+
     func configuraComponentes(){
         self.telaPrincialEventosView.tableView.delegate = self
         self.telaPrincialEventosView.tableView.dataSource = self
@@ -51,5 +48,14 @@ extension TelaPrincipalEventosViewController: UITableViewDelegate, UITableViewDa
         navigationItem.backButtonTitle = "Voltar"
         navigationController?.navigationBar.barTintColor = .blue
         navigationController?.pushViewController(navigation, animated: true)
+    }
+}
+
+extension TelaPrincipalEventosViewController: ServiceEventoOutput {
+    func retornaSucessoEvento(resposta: [BodyResponseEvento]) {
+        self.dadosEvento = resposta
+        DispatchQueue.main.async {
+            self.telaPrincialEventosView.tableView.reloadData()
+        }
     }
 }
