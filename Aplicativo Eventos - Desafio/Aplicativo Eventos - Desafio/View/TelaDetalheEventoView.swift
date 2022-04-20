@@ -45,6 +45,7 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.botaoLerMais = UIButton()
         
         super.init(frame: frame)
+        
         setupView()
     }
     
@@ -53,35 +54,39 @@ class TelaDetalheEventoView: UIView, CodableView {
     }
     
     func bind(detalheEvento: BodyResponseEvento) {
-       // self.imagem.image = UIImag
-        self.titulo.text = detalheEvento.title
+        DispatchQueue.main.async {
+            self.imagem.loadImageUsingUrlString(urlString: detalheEvento.image)
+            self.titulo.text = detalheEvento.title
+            self.labelPreco.text = String(detalheEvento.price ?? .zero)
+            
+            let dataFormatada = Date(milliseconds: Int64(detalheEvento.date ?? .zero))
+            self.labelData.text = dataFormatada.string(withFormat: "dd/MM/yyyy")
+            self.descricao.text = detalheEvento.description
+        }
     }
+
     
     func setupComponents() {
         self.backgroundColor = .white
         
-        self.imagem.layer.borderWidth = 1.0
-        self.imagem.layer.cornerRadius = 40.0
-        self.imagem.contentMode = .scaleAspectFit
-        self.imagem.backgroundColor = .blue
+        self.imagem.layer.cornerRadius = 50.0
+        self.imagem.clipsToBounds = true
+        self.imagem.contentMode = .scaleToFill
         
         self.titulo.font = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.bold)
         self.titulo.textColor = UIColor(hex: "005CA9")
         self.titulo.textAlignment = .left
         self.titulo.numberOfLines = .zero
-        self.titulo.text = "Doação de roupas"
-        
+
         self.labelPreco.font = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.regular)
         self.labelPreco.textColor = UIColor(hex: "008CB2")
         self.labelPreco.textAlignment = .left
         self.labelPreco.numberOfLines = .zero
-        self.labelPreco.text = "R$ 29,99"
         
         self.labelData.font = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.regular)
         self.labelData.textColor = UIColor(hex: "3A4859")
         self.labelData.textAlignment = .left
         self.labelData.numberOfLines = .zero
-        self.labelData.text = "29/09/2010"
         
         self.stackViewDetalhe.distribution = .fillProportionally
         self.stackViewDetalhe.axis = .vertical
@@ -108,7 +113,6 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.descricao.textColor = UIColor(hex: "3A4859")
         self.descricao.textAlignment = .left
         self.descricao.numberOfLines = 10
-        self.descricao.text = "O Patas Dadas estará na Redenção, nesse domingo, com cães para adoção e produtos à venda!\n\nNa ocasião, teremos bottons, bloquinhos e camisetas!\n\nTraga seu Pet, os amigos e o chima, e venha aproveitar esse dia de sol com a gente e com alguns de nossos peludinhos - que estarão prontinhos para ganhar o ♥ de um humano bem legal pra chamar de seu. \n\nAceitaremos todos os tipos de doação:\n- guias e coleiras em bom estado\n- ração (as que mais precisamos no momento são sênior e filhote)\n- roupinhas \n- cobertas \n- remédios dentro do prazo de validade"
         
         self.botaoLerMais.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: UIFont.Weight.regular)
         self.botaoLerMais.setTitle("Ler mais", for: .normal)
@@ -137,18 +141,18 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.imagem.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(80.0)
             make.leading.equalToSuperview().inset(16.0)
-            make.width.height.equalTo(80.0)
+            make.width.height.equalTo(100.0)
         }
         
         self.stackViewDetalhe.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(80.0)
             make.leading.equalTo(imagem.snp.trailing).offset(16.0)
+            make.trailing.equalToSuperview().inset(16.0)
         }
         
         self.stackViewBotoes.snp.makeConstraints { make in
             make.top.equalTo(stackViewDetalhe.snp.bottom).offset(16.0)
             make.leading.trailing.equalToSuperview().inset(16.0)
-            
         }
         
         self.descricao.snp.makeConstraints { make in

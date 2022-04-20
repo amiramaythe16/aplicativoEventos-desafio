@@ -47,7 +47,8 @@ class CustomEventoTableViewCell: UITableViewCell, CodableView {
     
     func bind(detalheEvento: BodyResponseEvento) {
         self.titulo.text = detalheEvento.title
-        self.dataEvento.text = String(detalheEvento.date ?? .zero)
+        let dataFormatada = Date(milliseconds: Int64(detalheEvento.date ?? .zero))
+        self.dataEvento.text = dataFormatada.string(withFormat: "dd/MM/yyyy")
         
         self.setupView()
     }

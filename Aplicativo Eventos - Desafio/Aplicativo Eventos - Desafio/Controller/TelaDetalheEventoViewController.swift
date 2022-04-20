@@ -11,20 +11,37 @@ class TelaDetalheEventoViewController: UIViewController {
 
     var telaDetalheView = TelaDetalheEventoView()
     
+    var idEvento: Int
+    
+    var presenter: EventosPresenter?
+    
+    init(idEvento: Int) {
+        self.idEvento = idEvento
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = telaDetalheView
+        self.presenter = EventosPresenter(output: self)
+        self.presenter?.consultaEvendo(idEvento: self.idEvento)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func configuraDadoEvento(dadoEvento: BodyResponseEvento){
+        self.telaDetalheView.bind(detalheEvento: dadoEvento)
     }
-    */
+}
 
+extension TelaDetalheEventoViewController: ServiceEventoOutput {
+    func retornaSucessoEvento(resposta: BodyResponseEvento) {
+        self.configuraDadoEvento(dadoEvento: resposta)
+    }
+    
+    func retornaSucessoEventos(resposta: [BodyResponseEvento]) {
+       // self.dadosEvento = resposta
+    }
 }

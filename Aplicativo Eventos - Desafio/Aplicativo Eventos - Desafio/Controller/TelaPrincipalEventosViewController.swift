@@ -19,7 +19,7 @@ class TelaPrincipalEventosViewController: UIViewController {
         self.view = telaPrincialEventosView
         self.configuraComponentes()
         self.presenter = EventosPresenter(output: self)
-        self.presenter?.consultaEvento()
+        self.presenter?.consultaEventos()
     }
 
     func configuraComponentes(){
@@ -44,7 +44,7 @@ extension TelaPrincipalEventosViewController: UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let navigation = TelaDetalheEventoViewController()
+        let navigation = TelaDetalheEventoViewController(idEvento: indexPath.row + 1)
         navigationItem.backButtonTitle = "Voltar"
         navigationController?.navigationBar.barTintColor = .blue
         navigationController?.pushViewController(navigation, animated: true)
@@ -52,7 +52,11 @@ extension TelaPrincipalEventosViewController: UITableViewDelegate, UITableViewDa
 }
 
 extension TelaPrincipalEventosViewController: ServiceEventoOutput {
-    func retornaSucessoEvento(resposta: [BodyResponseEvento]) {
+    func retornaSucessoEvento(resposta: BodyResponseEvento) {
+        
+    }
+    
+    func retornaSucessoEventos(resposta: [BodyResponseEvento]) {
         self.dadosEvento = resposta
         DispatchQueue.main.async {
             self.telaPrincialEventosView.tableView.reloadData()

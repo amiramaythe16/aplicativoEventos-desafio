@@ -9,14 +9,14 @@ import Foundation
 
 struct BodyResponseEvento: Codable {
     var date: Int?
-    var bodyResponseEventoDescription: String?
+    var description: String?
     var image: String?
     var longitude, latitude, price: Double?
     var title, id: String?
 
     enum CodingKeys: String, CodingKey {
         case date
-        case bodyResponseEventoDescription = "description"
+        case description
         case image, longitude, latitude, price, title, id
     }
 }

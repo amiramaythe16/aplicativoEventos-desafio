@@ -8,7 +8,8 @@
 import Foundation
 
 protocol ServiceEventoOutput {
-    func retornaSucessoEvento(resposta: [BodyResponseEvento])
+    func retornaSucessoEventos(resposta: [BodyResponseEvento])
+    func retornaSucessoEvento(resposta: BodyResponseEvento)
 }
 
 class ServiceEvento {
@@ -26,6 +27,21 @@ class ServiceEvento {
                 
                 do {
                     let resposta = try JSONDecoder().decode([BodyResponseEvento].self, from: responseDados)
+                    self.output.retornaSucessoEventos(resposta: resposta)
+                } catch let error {
+                    print(error)
+                }
+            }.resume()
+        }
+    }
+    
+    func getEvento(idEvento: Int){
+        if let url = URL(string: "https://5f5a8f24d44d640016169133.mockapi.io/api/events/\(idEvento)") {
+            URLSession.shared.dataTask(with: url) { dados, response, error in
+                guard let responseDados = dados else {return}
+                
+                do {
+                    let resposta = try JSONDecoder().decode(BodyResponseEvento.self, from: responseDados)
                     self.output.retornaSucessoEvento(resposta: resposta)
                 } catch let error {
                     print(error)

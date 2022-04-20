@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class EventosPresenter: NSObject {
     var servicoConsultaEventos: ServiceEvento?
@@ -17,13 +18,23 @@ class EventosPresenter: NSObject {
         self.servicoConsultaEventos = ServiceEvento(output: self)
     }
 
-    func consultaEvento(){
+    func consultaEventos(){
         self.servicoConsultaEventos?.getEventos()
     }
+    
+    func consultaEvendo(idEvento: Int){
+        self.servicoConsultaEventos?.getEvento(idEvento: idEvento)
+    } 
+    
 }
 
 extension EventosPresenter: ServiceEventoOutput {
-    func retornaSucessoEvento(resposta: [BodyResponseEvento]) {
+    
+    func retornaSucessoEvento(resposta: BodyResponseEvento) {
         self.output?.retornaSucessoEvento(resposta: resposta)
+    }
+    
+    func retornaSucessoEventos(resposta: [BodyResponseEvento]) {
+        self.output?.retornaSucessoEventos(resposta: resposta)
     }
 }
