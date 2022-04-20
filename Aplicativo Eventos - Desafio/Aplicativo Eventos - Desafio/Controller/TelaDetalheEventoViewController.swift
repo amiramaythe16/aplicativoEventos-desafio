@@ -17,6 +17,13 @@ class TelaDetalheEventoViewController: UIViewController {
     
     var dadoEvento: BodyResponseEvento?
     
+    let formatadorMoeda: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "pt_BR")
+        return formatter
+    }()
+    
     init(idEvento: Int) {
         self.idEvento = idEvento
         super.init(nibName: nil, bundle: nil)
@@ -35,6 +42,7 @@ class TelaDetalheEventoViewController: UIViewController {
     }
     
     func configuraComponentes(){
+        self.telaDetalheView.responder = self
         self.telaDetalheView.tableView.delegate = self
         self.telaDetalheView.tableView.dataSource = self
         self.telaDetalheView.tableView.rowHeight = UITableView.automaticDimension
@@ -72,6 +80,33 @@ extension TelaDetalheEventoViewController: UITableViewDelegate, UITableViewDataS
         cell.bind(descricao: self.dadoEvento?.description ?? "--")
         return cell
     }
+}
+
+extension TelaDetalheEventoViewController: TelaDetalheEventoViewResponder {
+    func botaoCheckinPressionado() {
+        
+    }
     
+    func botaoCompartilharPressionado() {
+
+        guard let tituloEvento = self.dadoEvento?.title,
+              let descricaoEvento = self.dadoEvento?.description,
+              let dataEvento = self.dadoEvento?.date,
+              let precoEvento = self.dadoEvento?.price else {return}
+        
+        let dataFormatada = Date(milliseconds: Int64(dataEvento))
+        let data = dataFormatada.string(withFormat: "dd/MM/yyyy")
+        
+        let preco = self.formatadorMoeda.string(from: NSNumber(value: precoEvento))
     
+        let text = "\(tituloEvento)\n\nData do evento: \(data)\nPreço do evento: \(preco ?? "--")\n\n\(descricaoEvento)"
+        
+        let textToShare = [text]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+        
+        self.present(activityViewController, animated: true, completion: nil)
+    }
 }

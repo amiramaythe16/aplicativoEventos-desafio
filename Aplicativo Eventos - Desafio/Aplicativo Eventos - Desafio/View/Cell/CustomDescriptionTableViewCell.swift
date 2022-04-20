@@ -44,7 +44,7 @@ class CustomDescriptionTableViewCell: UITableViewCell, CodableView {
         self.descricao.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16.0)
             make.leading.trailing.equalToSuperview().inset(16.0)
-            make.bottom.equalToSuperview().offset(8.0)
+            make.bottom.equalToSuperview().offset(16.0)
         }
         
     }

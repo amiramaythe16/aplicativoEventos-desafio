@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol TelaDetalheEventoViewResponder {
+    func botaoCheckinPressionado()
+    func botaoCompartilharPressionado()
+}
+
 class TelaDetalheEventoView: UIView, CodableView {
+    
+    var responder: TelaDetalheEventoViewResponder?
     
     var imagem: UIImageView
     
@@ -69,6 +76,7 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.imagem.layer.cornerRadius = 50.0
         self.imagem.clipsToBounds = true
         self.imagem.contentMode = .scaleToFill
+        self.imagem.backgroundColor = UIColor(hex: "005CA9")
         
         self.titulo.font = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.bold)
         self.titulo.textColor = UIColor(hex: "005CA9")
@@ -95,12 +103,13 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.botaoCheckin.layer.borderWidth = 1.0
         self.botaoCheckin.layer.borderColor = UIColor(hex: "005CA9").cgColor
         self.botaoCheckin.titleLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.semibold)
-      //  self.botaoCheckin.addTarget(self, action: #selector(botao1Pressionado), for: .touchUpInside)
+        self.botaoCheckin.addTarget(self, action: #selector(botaoCheckinPressionado), for: .touchUpInside)
         
         self.botaoCompartilhar.setTitle("Compartilhar", for: .normal)
         self.botaoCompartilhar.backgroundColor = UIColor(hex: "005CA9")
         self.botaoCompartilhar.layer.cornerRadius = 4.0
         self.botaoCompartilhar.titleLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.semibold)
+        self.botaoCompartilhar.addTarget(self, action: #selector(botaoCompartilharPressionado), for: .touchUpInside)
         
         self.stackViewBotoes.distribution = .fillProportionally
         self.stackViewBotoes.axis = .horizontal
@@ -133,7 +142,7 @@ class TelaDetalheEventoView: UIView, CodableView {
         }
         
         self.stackViewBotoes.snp.makeConstraints { make in
-            make.top.equalTo(stackViewDetalhe.snp.bottom).offset(20.0)
+            make.top.equalTo(stackViewDetalhe.snp.bottom).offset(24.0)
             make.leading.trailing.equalToSuperview().inset(16.0)
         }
         
@@ -150,6 +159,14 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.botaoCompartilhar.snp.makeConstraints { make in
             make.height.equalTo(32.0)
         }
+    }
+    
+    @objc func botaoCheckinPressionado(){
+        responder?.botaoCheckinPressionado()
+    }
+    
+    @objc func botaoCompartilharPressionado(){
+        responder?.botaoCompartilharPressionado()
     }
 
 }
