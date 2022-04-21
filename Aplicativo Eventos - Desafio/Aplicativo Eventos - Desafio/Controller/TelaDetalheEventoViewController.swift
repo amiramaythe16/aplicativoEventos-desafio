@@ -38,7 +38,7 @@ class TelaDetalheEventoViewController: UIViewController {
         self.view = telaDetalheView
         self.configuraComponentes()
         self.presenter = EventosPresenter(output: self)
-        self.presenter?.consultaEvendo(idEvento: self.idEvento)
+        self.presenter?.consultaEvento(idEvento: self.idEvento)
     }
     
     func configuraComponentes(){
@@ -63,10 +63,6 @@ extension TelaDetalheEventoViewController: ServiceEventoOutput {
             self.telaDetalheView.tableView.reloadData()
         }
     }
-    
-    func retornaSucessoEventos(resposta: [BodyResponseEvento]) {
-       // self.dadosEvento = resposta
-    }
 }
 
 extension TelaDetalheEventoViewController: UITableViewDelegate, UITableViewDataSource {
@@ -84,7 +80,10 @@ extension TelaDetalheEventoViewController: UITableViewDelegate, UITableViewDataS
 
 extension TelaDetalheEventoViewController: TelaDetalheEventoViewResponder {
     func botaoCheckinPressionado() {
-        
+        let navigation = TelaCheckinViewController()
+        navigationItem.backButtonTitle = "Voltar"
+        navigationController?.navigationBar.barTintColor = .blue
+        navigationController?.pushViewController(navigation, animated: true)
     }
     
     func botaoCompartilharPressionado() {

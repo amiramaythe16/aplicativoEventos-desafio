@@ -10,7 +10,15 @@ import Foundation
 protocol ServiceEventoOutput {
     func retornaSucessoEventos(resposta: [BodyResponseEvento])
     func retornaSucessoEvento(resposta: BodyResponseEvento)
+    func retornaSucessoCheckin(resposta: BodyCheckinRequest)
 }
+
+extension ServiceEventoOutput {
+    func retornaSucessoEventos(resposta: [BodyResponseEvento]){}
+    func retornaSucessoEvento(resposta: BodyResponseEvento){}
+    func retornaSucessoCheckin(resposta: BodyCheckinRequest){}
+}
+
 
 class ServiceEvento {
     
@@ -43,6 +51,21 @@ class ServiceEvento {
                 do {
                     let resposta = try JSONDecoder().decode(BodyResponseEvento.self, from: responseDados)
                     self.output.retornaSucessoEvento(resposta: resposta)
+                } catch let error {
+                    print(error)
+                }
+            }.resume()
+        }
+    }
+    
+    func postCheckin(){
+        if let url = URL(string: "http://5f5a8f24d44d640016169133.mockapi.io/api/checkin") {
+            URLSession.shared.dataTask(with: url) { dados, response, error in
+                guard let responseDados = dados else {return}
+                
+                do {
+                    let resposta = try JSONDecoder().decode(BodyCheckinRequest.self, from: responseDados)
+                    self.output.retornaSucessoCheckin(resposta: resposta)
                 } catch let error {
                     print(error)
                 }

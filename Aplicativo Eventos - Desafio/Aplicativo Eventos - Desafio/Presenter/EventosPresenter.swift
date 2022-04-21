@@ -22,14 +22,21 @@ class EventosPresenter: NSObject {
         self.servicoConsultaEventos?.getEventos()
     }
     
-    func consultaEvendo(idEvento: Int){
+    func consultaEvento(idEvento: Int){
         self.servicoConsultaEventos?.getEvento(idEvento: idEvento)
-    } 
+    }
+    
+    func efetivaCheckin(){
+        self.servicoConsultaEventos?.postCheckin()
+    }
     
 }
 
 extension EventosPresenter: ServiceEventoOutput {
-    
+    func retornaSucessoCheckin(resposta: BodyCheckinRequest) {
+        self.output?.retornaSucessoCheckin(resposta: resposta)
+    }
+
     func retornaSucessoEvento(resposta: BodyResponseEvento) {
         self.output?.retornaSucessoEvento(resposta: resposta)
     }

@@ -52,10 +52,6 @@ extension TelaPrincipalEventosViewController: UITableViewDelegate, UITableViewDa
 }
 
 extension TelaPrincipalEventosViewController: ServiceEventoOutput {
-    func retornaSucessoEvento(resposta: BodyResponseEvento) {
-        
-    }
-    
     func retornaSucessoEventos(resposta: [BodyResponseEvento]) {
         self.dadosEvento = resposta
         DispatchQueue.main.async {

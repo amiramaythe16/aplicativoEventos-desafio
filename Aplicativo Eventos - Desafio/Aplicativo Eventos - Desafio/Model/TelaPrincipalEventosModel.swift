@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - BodyResponseEvento
+
 struct BodyResponseEvento: Codable {
     var date: Int?
     var description: String?
@@ -18,5 +20,15 @@ struct BodyResponseEvento: Codable {
         case date
         case description
         case image, longitude, latitude, price, title, id
+    }
+}
+
+// MARK: - BodyCheckinRequest
+struct BodyCheckinRequest: Codable {
+    var eventID, name, email: String?
+
+    enum CodingKeys: String, CodingKey {
+        case eventID = "eventId"
+        case name, email
     }
 }
