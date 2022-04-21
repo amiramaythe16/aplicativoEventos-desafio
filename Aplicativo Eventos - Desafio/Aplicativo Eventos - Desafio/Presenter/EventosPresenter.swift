@@ -28,19 +28,21 @@ class EventosPresenter: NSObject {
         self.servicoConsultaEventos?.getEvento(idEvento: idEvento)
     }
     
-    func efetivaCheckin(){
+    func efetivaCheckin(idEvento: String, nomeUsuario: String, emailUsuario: String){
+        let body = BodyCheckinRequest(eventID: idEvento, name: nomeUsuario, email: emailUsuario)
+        
         self.output?.iniciaCarregamento(true)
-        self.servicoConsultaEventos?.postCheckin()
+        self.servicoConsultaEventos?.postCheckin(body: body)
     }
     
 }
 
 extension EventosPresenter: ServiceEventoOutput {
-    func retornaSucessoCheckin(resposta: BodyCheckinRequest) {
+    func retornaSucessoCheckin() {
         self.output?.iniciaCarregamento(false)
-        self.output?.retornaSucessoCheckin(resposta: resposta)
+        self.output?.retornaSucessoCheckin()
     }
-
+  
     func retornaSucessoEvento(resposta: BodyResponseEvento) {
         self.output?.iniciaCarregamento(false)
         self.output?.retornaSucessoEvento(resposta: resposta)

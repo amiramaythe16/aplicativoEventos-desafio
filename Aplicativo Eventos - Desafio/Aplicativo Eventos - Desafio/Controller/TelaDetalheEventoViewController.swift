@@ -84,7 +84,7 @@ extension TelaDetalheEventoViewController: UITableViewDelegate, UITableViewDataS
 
 extension TelaDetalheEventoViewController: TelaDetalheEventoViewResponder {
     func botaoCheckinPressionado() {
-        let navigation = TelaCheckinViewController()
+        let navigation = TelaCheckinViewController(idEvento: self.idEvento)
         navigationItem.backButtonTitle = "Voltar"
         navigationController?.navigationBar.barTintColor = .blue
         navigationController?.pushViewController(navigation, animated: true)

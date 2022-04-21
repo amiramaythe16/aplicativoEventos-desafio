@@ -26,6 +26,19 @@ class TelaCheckinView: UIView, CodableView {
     
     var botao: UIButton
     
+    var populaDelegate: PopulaDadosCheckinProtocol?
+    var nomeDigitado: String? {
+        didSet {
+            atualizaValores()
+        }
+    }
+    
+    var emailDigitado: String? {
+        didSet {
+            atualizaValores()
+        }
+    }
+    
     override init(frame: CGRect) {
         self.titulo = UILabel()
         self.descricao = UILabel()
@@ -83,6 +96,7 @@ class TelaCheckinView: UIView, CodableView {
         self.textFieldEmail.layer.borderColor = UIColor(hex: "3A4859").cgColor
         self.textFieldEmail.layer.cornerRadius = 8.0
         self.textFieldEmail.keyboardType = .emailAddress
+        self.textFieldEmail.delegate = self
     
         self.labelTextFieldEmail.text = " E-mail "
         self.labelTextFieldEmail.font = UIFont.systemFont(ofSize: 12.0, weight: UIFont.Weight.regular)
@@ -139,6 +153,11 @@ class TelaCheckinView: UIView, CodableView {
         }
     }
     
+    fileprivate func atualizaValores() {
+        populaDelegate?.populaNome(nome: nomeDigitado ?? "")
+        populaDelegate?.populaEmial(email: emailDigitado ?? "")
+    }
+    
     @objc func botaoConfirmarPressionado(){
         responder?.botaoConfirmarPressionado()
     }
@@ -154,16 +173,21 @@ extension TelaCheckinView: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let value = textFieldNome.text {
             let text = NSString(string: value).replacingCharacters(in: range, with: string)
-            if text != "" {
-                setBotaoProximoHabilitado(true)
+
+            //se for espaço em branco já retorna false pois não é permitido
+            if text == " " {
+                return false
             } else {
-                setBotaoProximoHabilitado(false)
+                nomeDigitado = text
             }
-        } else if var valueEmail = textFieldEmail.text {
-            if string == "" { valueEmail = String(valueEmail.dropLast()) }
-            "\(valueEmail)\(string)".isValidEmail() ? setBotaoProximoHabilitado(true) : setBotaoProximoHabilitado(false)
         }
+
+//        } else if let valueEmail = textFieldEmail.text {
+//            let string = NSString(string: valueEmail).replacingCharacters(in: range, with: string)
+//          //  if string == "" { valueEmail = String(valueEmail.dropLast()) }
+//            //"\(valueEmail)\(string)".isValidEmail() ? setBotaoProximoHabilitado(true) : setBotaoProximoHabilitado(false)
+//            emailDigitado = string
+//        }
         return true
     }
-    
 }

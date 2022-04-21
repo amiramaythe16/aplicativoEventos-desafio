@@ -11,14 +11,14 @@ protocol ServiceEventoOutput {
     func iniciaCarregamento(_ isLoading: Bool)
     func retornaSucessoEventos(resposta: [BodyResponseEvento])
     func retornaSucessoEvento(resposta: BodyResponseEvento)
-    func retornaSucessoCheckin(resposta: BodyCheckinRequest)
+    func retornaSucessoCheckin()
 }
 
 extension ServiceEventoOutput {
     func iniciaCarregamento(_ isLoading: Bool){}
     func retornaSucessoEventos(resposta: [BodyResponseEvento]){}
     func retornaSucessoEvento(resposta: BodyResponseEvento){}
-    func retornaSucessoCheckin(resposta: BodyCheckinRequest){}
+    func retornaSucessoCheckin(){}
 }
 
 
@@ -60,14 +60,23 @@ class ServiceEvento {
         }
     }
     
-    func postCheckin(){
+    func postCheckin(body: BodyCheckinRequest){
         if let url = URL(string: "http://5f5a8f24d44d640016169133.mockapi.io/api/checkin") {
-            URLSession.shared.dataTask(with: url) { dados, response, error in
-                guard let responseDados = dados else {return}
-                
+            
+            var request = URLRequest(url: url)
+           
+            var params: [String: Any]?
+            params = ["eventID" : body.eventID ?? "", "name" : body.name ?? "", "email": body.email ?? ""]
+            
+            request.httpBody = try? JSONSerialization.data(withJSONObject: params ?? "", options: .prettyPrinted)
+            request.httpMethod = "POST"
+            
+            URLSession.shared.dataTask(with: request) { dados, response, error in
+                guard let data = dados, error == nil else {return}
                 do {
-                    let resposta = try JSONDecoder().decode(BodyCheckinRequest.self, from: responseDados)
-                    self.output.retornaSucessoCheckin(resposta: resposta)
+                    let responseDados = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    self.output.retornaSucessoCheckin()
+                    print(responseDados)
                 } catch let error {
                     print(error)
                 }
