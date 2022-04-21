@@ -8,14 +8,34 @@
 import Foundation
 import UIKit
 
-class EventosPresenter: NSObject {
-    var servicoConsultaEventos: ServiceEvento?
-    var output: ServiceEventoOutput?
+protocol EventosPresenterOutput {
+    func iniciaCarregamento(_ isLoading: Bool)
+    func retornaSucessoEventos(resposta: [BodyResponseEvento])
+    func retornaSucessoEvento(resposta: BodyResponseEvento)
+    func retornaSucessoCheckin()
+}
+
+extension EventosPresenterOutput {
+    func iniciaCarregamento(_ isLoading: Bool){}
+    func retornaSucessoEventos(resposta: [BodyResponseEvento]){}
+    func retornaSucessoEvento(resposta: BodyResponseEvento){}
+    func retornaSucessoCheckin(){}
+}
+
+protocol EventosPresenterProtocol {
+    func consultaEventos()
+    func consultaEvento(idEvento: Int)
+    func efetivaCheckin(idEvento: String, nomeUsuario: String, emailUsuario: String)
+}
+
+class EventosPresenter: EventosPresenterProtocol {
+    var servicoConsultaEventos: ServiceEventProtocol?
+    var output: EventosPresenterOutput?
     
-    init(output: ServiceEventoOutput) {
-        super.init()
+    init(output: EventosPresenterOutput) {
         self.output = output
-        self.servicoConsultaEventos = ServiceEvento(output: self)
+        self.servicoConsultaEventos = ServiceEvento()
+        self.servicoConsultaEventos?.delegate = self
     }
 
     func consultaEventos(){
@@ -34,7 +54,6 @@ class EventosPresenter: NSObject {
         self.output?.iniciaCarregamento(true)
         self.servicoConsultaEventos?.postCheckin(body: body)
     }
-    
 }
 
 extension EventosPresenter: ServiceEventoOutput {

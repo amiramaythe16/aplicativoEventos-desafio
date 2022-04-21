@@ -16,7 +16,7 @@ class TelaCheckinViewController: UIViewController {
 
     var telaCheckin = TelaCheckinView()
     var idEvento: Int
-    var presenter: EventosPresenter?
+    var presenter: EventosPresenterProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ extension TelaCheckinViewController: TelaCheckinViewResponder {
     }
 }
 
-extension TelaCheckinViewController: ServiceEventoOutput {
+extension TelaCheckinViewController: EventosPresenterOutput {
     func retornaSucessoCheckin() {
         DispatchQueue.main.async {
             let alertController = UIAlertController()

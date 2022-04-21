@@ -21,14 +21,17 @@ extension ServiceEventoOutput {
     func retornaSucessoCheckin(){}
 }
 
+protocol ServiceEventProtocol {
+    func getEventos()
+    func getEvento(idEvento: Int)
+    func postCheckin(body: BodyCheckinRequest)
+    var delegate: ServiceEventoOutput? { get set }
+}
 
-class ServiceEvento {
+
+class ServiceEvento: ServiceEventProtocol {
     
-    var output: ServiceEventoOutput
-    
-    init(output: ServiceEventoOutput) {
-        self.output = output
-    }
+    var delegate: ServiceEventoOutput?
     
     func getEventos(){
         if let url = URL(string: "https://5f5a8f24d44d640016169133.mockapi.io/api/events") {
@@ -37,7 +40,7 @@ class ServiceEvento {
                 
                 do {
                     let resposta = try JSONDecoder().decode([BodyResponseEvento].self, from: responseDados)
-                    self.output.retornaSucessoEventos(resposta: resposta)
+                    self.delegate?.retornaSucessoEventos(resposta: resposta)
                 } catch let error {
                     print(error.localizedDescription)
                 }
@@ -52,7 +55,7 @@ class ServiceEvento {
                 
                 do {
                     let resposta = try JSONDecoder().decode(BodyResponseEvento.self, from: responseDados)
-                    self.output.retornaSucessoEvento(resposta: resposta)
+                    self.delegate?.retornaSucessoEvento(resposta: resposta)
                 } catch let error {
                     print(error.localizedDescription)
                 }
@@ -73,7 +76,7 @@ class ServiceEvento {
             
             URLSession.shared.dataTask(with: request) { dados, response, error in
                 guard let error = error else {
-                    self.output.retornaSucessoCheckin()
+                    self.delegate?.retornaSucessoCheckin()
                     return
                 }
                 print(error.localizedDescription)

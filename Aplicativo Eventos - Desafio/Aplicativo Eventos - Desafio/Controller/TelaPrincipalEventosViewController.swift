@@ -10,8 +10,7 @@ import UIKit
 class TelaPrincipalEventosViewController: UIViewController {
 
     var telaPrincialEventosView = TelaPrincipalEventosView()
-    var presenter: EventosPresenter?
-    
+    var presenter: EventosPresenterProtocol?
     var dadosEvento = [BodyResponseEvento]()
         
     override func viewDidLoad() {
@@ -51,7 +50,7 @@ extension TelaPrincipalEventosViewController: UITableViewDelegate, UITableViewDa
     }
 }
 
-extension TelaPrincipalEventosViewController: ServiceEventoOutput {
+extension TelaPrincipalEventosViewController: EventosPresenterOutput {
     func iniciaCarregamento(_ isLoading: Bool) {
         self.telaPrincialEventosView.iniciaCarregamento(isLoading)
     }

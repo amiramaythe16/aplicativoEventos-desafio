@@ -11,7 +11,7 @@ class TelaDetalheEventoViewController: UIViewController {
 
     var telaDetalheView = TelaDetalheEventoView()
     var idEvento: Int
-    var presenter: EventosPresenter?
+    var presenter: EventosPresenterProtocol?
     var dadoEvento: BodyResponseEvento?
     
     let formatadorMoeda: NumberFormatter = {
@@ -52,7 +52,7 @@ class TelaDetalheEventoViewController: UIViewController {
     }
 }
 
-extension TelaDetalheEventoViewController: ServiceEventoOutput {
+extension TelaDetalheEventoViewController: EventosPresenterOutput {
     func retornaSucessoEvento(resposta: BodyResponseEvento) {
         self.dadoEvento = resposta
         self.configuraDadoEvento(dadoEvento: resposta)
