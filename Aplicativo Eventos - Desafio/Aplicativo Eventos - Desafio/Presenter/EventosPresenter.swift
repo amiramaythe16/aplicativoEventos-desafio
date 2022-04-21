@@ -39,7 +39,6 @@ class EventosPresenter: NSObject {
 
 extension EventosPresenter: ServiceEventoOutput {
     func retornaSucessoCheckin() {
-        self.output?.iniciaCarregamento(false)
         self.output?.retornaSucessoCheckin()
     }
   

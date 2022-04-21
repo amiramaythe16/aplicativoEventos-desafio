@@ -15,20 +15,14 @@ protocol PopulaDadosCheckinProtocol {
 class TelaCheckinViewController: UIViewController {
 
     var telaCheckin = TelaCheckinView()
-    
     var idEvento: Int
-    var nome: String?
-    var email: String?
-    
     var presenter: EventosPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = telaCheckin
-     //   self.telaCheckin.setBotaoProximoHabilitado(false)
         self.telaCheckin.responder = self
         self.presenter = EventosPresenter(output: self)
-        self.telaCheckin.populaDelegate = self
     }
     
     init(idEvento: Int) {
@@ -39,28 +33,32 @@ class TelaCheckinViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 
 extension TelaCheckinViewController: TelaCheckinViewResponder {
     func botaoConfirmarPressionado() {
-        self.presenter?.efetivaCheckin(idEvento: String(self.idEvento), nomeUsuario: self.nome ?? "", emailUsuario: "amira@gmail.com")
+        if let mail = self.telaCheckin.textFieldEmail.text,
+            mail.isValidEmail(),
+            let nome = self.telaCheckin.textFieldNome.text {
+            self.presenter?.efetivaCheckin(idEvento: String(self.idEvento), nomeUsuario: nome, emailUsuario: mail)
+        } else {
+            let alertController = UIAlertController()
+            let alert = UIAlertAction.init(title: "Digite um e-mail valido", style: .default)
+            alertController.addAction(alert)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 }
 
 extension TelaCheckinViewController: ServiceEventoOutput {
     func retornaSucessoCheckin() {
-        print("foi")
+        DispatchQueue.main.async {
+            let alertController = UIAlertController()
+            let alert = UIAlertAction(title: "Check-in realizado com sucesso", style: .default, handler: {_ in
+                self.navigationController?.popToRootViewController(animated: true)
+            })
+            alertController.addAction(alert)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
-}
-
-extension TelaCheckinViewController: PopulaDadosCheckinProtocol {
-    func populaNome(nome: String) {
-        self.nome = nome
-    }
-    
-    func populaEmial(email: String) {
-        self.email = email
-    }
-    
 }

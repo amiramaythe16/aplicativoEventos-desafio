@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_Aplicativo_Eventos___Desafio_Aplicativo_Eventos___DesafioUITests : NSObject
+@end
+@implementation PodsDummy_Pods_Aplicativo_Eventos___Desafio_Aplicativo_Eventos___DesafioUITests
+@end

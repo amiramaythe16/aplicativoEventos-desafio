@@ -10,11 +10,8 @@ import UIKit
 class TelaDetalheEventoViewController: UIViewController {
 
     var telaDetalheView = TelaDetalheEventoView()
-    
     var idEvento: Int
-    
     var presenter: EventosPresenter?
-    
     var dadoEvento: BodyResponseEvento?
     
     let formatadorMoeda: NumberFormatter = {
@@ -106,9 +103,7 @@ extension TelaDetalheEventoViewController: TelaDetalheEventoViewResponder {
         
         let textToShare = [text]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        
-        activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+        activityViewController.popoverPresentationController?.sourceView = self.view
         
         self.present(activityViewController, animated: true, completion: nil)
     }

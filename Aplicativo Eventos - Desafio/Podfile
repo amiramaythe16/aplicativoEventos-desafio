@@ -1,0 +1,20 @@
+# Uncomment the next line to define a global platform for your project
+ platform :ios, '10.0'
+
+target 'Aplicativo Eventos - Desafio' do
+  use_frameworks!
+
+  # Pods for Aplicativo Eventos - Desafio
+
+  pod  'SnapKit' ,  '~> 5.6.0' 
+
+  target 'Aplicativo Eventos - DesafioTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'Aplicativo Eventos - DesafioUITests' do
+    # Pods for testing
+  end
+
+end

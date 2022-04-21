@@ -149,7 +149,7 @@ class TelaDetalheEventoView: UIView, CodableView {
         }
         
         self.stackViewBotoes.snp.makeConstraints { make in
-            make.top.equalTo(stackViewDetalhe.snp.bottom).offset(24.0)
+            make.top.equalTo(imagem.snp.bottom).offset(24.0)
             make.leading.trailing.equalToSuperview().inset(16.0)
         }
         

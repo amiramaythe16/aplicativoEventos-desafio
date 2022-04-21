@@ -39,7 +39,7 @@ class ServiceEvento {
                     let resposta = try JSONDecoder().decode([BodyResponseEvento].self, from: responseDados)
                     self.output.retornaSucessoEventos(resposta: resposta)
                 } catch let error {
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }.resume()
         }
@@ -54,7 +54,7 @@ class ServiceEvento {
                     let resposta = try JSONDecoder().decode(BodyResponseEvento.self, from: responseDados)
                     self.output.retornaSucessoEvento(resposta: resposta)
                 } catch let error {
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }.resume()
         }
@@ -72,14 +72,11 @@ class ServiceEvento {
             request.httpMethod = "POST"
             
             URLSession.shared.dataTask(with: request) { dados, response, error in
-                guard let data = dados, error == nil else {return}
-                do {
-                    let responseDados = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                guard let error = error else {
                     self.output.retornaSucessoCheckin()
-                    print(responseDados)
-                } catch let error {
-                    print(error)
+                    return
                 }
+                print(error.localizedDescription)
             }.resume()
         }
     }

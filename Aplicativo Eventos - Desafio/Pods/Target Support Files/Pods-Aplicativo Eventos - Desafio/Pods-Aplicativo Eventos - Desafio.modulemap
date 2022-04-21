@@ -1,0 +1,6 @@
+framework module Pods_Aplicativo_Eventos___Desafio {
+  umbrella header "Pods-Aplicativo Eventos - Desafio-umbrella.h"
+
+  export *
+  module * { export * }
+}
