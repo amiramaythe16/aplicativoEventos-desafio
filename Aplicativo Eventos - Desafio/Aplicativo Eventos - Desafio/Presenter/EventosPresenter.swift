@@ -19,14 +19,17 @@ class EventosPresenter: NSObject {
     }
 
     func consultaEventos(){
+        self.output?.iniciaCarregamento(true)
         self.servicoConsultaEventos?.getEventos()
     }
     
     func consultaEvento(idEvento: Int){
+        self.output?.iniciaCarregamento(true)
         self.servicoConsultaEventos?.getEvento(idEvento: idEvento)
     }
     
     func efetivaCheckin(){
+        self.output?.iniciaCarregamento(true)
         self.servicoConsultaEventos?.postCheckin()
     }
     
@@ -34,14 +37,17 @@ class EventosPresenter: NSObject {
 
 extension EventosPresenter: ServiceEventoOutput {
     func retornaSucessoCheckin(resposta: BodyCheckinRequest) {
+        self.output?.iniciaCarregamento(false)
         self.output?.retornaSucessoCheckin(resposta: resposta)
     }
 
     func retornaSucessoEvento(resposta: BodyResponseEvento) {
+        self.output?.iniciaCarregamento(false)
         self.output?.retornaSucessoEvento(resposta: resposta)
     }
     
     func retornaSucessoEventos(resposta: [BodyResponseEvento]) {
+        self.output?.iniciaCarregamento(false)
         self.output?.retornaSucessoEventos(resposta: resposta)
     }
 }

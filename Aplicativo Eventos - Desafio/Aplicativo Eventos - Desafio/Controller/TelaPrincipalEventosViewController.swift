@@ -52,6 +52,10 @@ extension TelaPrincipalEventosViewController: UITableViewDelegate, UITableViewDa
 }
 
 extension TelaPrincipalEventosViewController: ServiceEventoOutput {
+    func iniciaCarregamento(_ isLoading: Bool) {
+        self.telaPrincialEventosView.iniciaCarregamento(isLoading)
+    }
+    
     func retornaSucessoEventos(resposta: [BodyResponseEvento]) {
         self.dadosEvento = resposta
         DispatchQueue.main.async {

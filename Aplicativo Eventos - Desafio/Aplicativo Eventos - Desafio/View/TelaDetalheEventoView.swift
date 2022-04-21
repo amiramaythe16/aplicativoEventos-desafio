@@ -18,6 +18,8 @@ class TelaDetalheEventoView: UIView, CodableView {
     
     var imagem: UIImageView
     
+    var loading: UIActivityIndicatorView
+    
     var titulo: UILabel
     var labelPreco: UILabel
     var labelData: UILabel
@@ -49,6 +51,7 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.stackViewBotoes = UIStackView(arrangedSubviews: [botaoCheckin, botaoCompartilhar])
         
         self.tableView = UITableView()
+        self.loading = UIActivityIndicatorView()
         super.init(frame: frame)
         
         setupView()
@@ -117,6 +120,9 @@ class TelaDetalheEventoView: UIView, CodableView {
         
         self.tableView.backgroundColor = .clear
         self.tableView.separatorStyle = .none
+        
+        self.loading.style = .large
+        self.loading.backgroundColor = .white
 
     }
     
@@ -126,6 +132,7 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.addSubview(stackViewDetalhe)
         self.addSubview(stackViewBotoes)
         self.addSubview(tableView)
+        self.addSubview(loading)
     }
     
     func setupConstraints() {
@@ -152,6 +159,11 @@ class TelaDetalheEventoView: UIView, CodableView {
             make.bottom.equalToSuperview().inset(8.0)
         }
         
+        self.loading.snp.makeConstraints { make in
+            make.height.width.equalTo(100.0)
+            make.centerX.centerY.equalToSuperview()
+        }
+        
         self.botaoCheckin.snp.makeConstraints { make in
             make.height.equalTo(32.0)
         }
@@ -167,6 +179,22 @@ class TelaDetalheEventoView: UIView, CodableView {
     
     @objc func botaoCompartilharPressionado(){
         responder?.botaoCompartilharPressionado()
+    }
+    
+    func iniciaCarregamento(_ isLoading: Bool) {
+        isLoading ? showLoading() : hideLoading()
+    }
+    
+    func showLoading() {
+        loading.startAnimating()
+        loading.isHidden = false
+    }
+    
+    func hideLoading() {
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+            self.loading.isHidden = true
+        }
     }
 
 }

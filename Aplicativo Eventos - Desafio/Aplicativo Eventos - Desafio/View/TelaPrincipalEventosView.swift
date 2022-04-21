@@ -11,10 +11,13 @@ import SnapKit
 class TelaPrincipalEventosView: UIView, CodableView {
     
     var view: UIView
-    
+
     var titulo: UILabel
     var descricao: UILabel
     var stackViewTitulo: UIStackView
+    
+    var loading: UIActivityIndicatorView
+    
     var tableView: UITableView
     
     override init(frame: CGRect) {
@@ -22,6 +25,7 @@ class TelaPrincipalEventosView: UIView, CodableView {
         self.titulo = UILabel()
         self.descricao = UILabel()
         self.stackViewTitulo = UIStackView(arrangedSubviews: [titulo, descricao])
+        self.loading = UIActivityIndicatorView()
         self.tableView = UITableView()
         super.init(frame: frame)
         setupView()
@@ -52,6 +56,9 @@ class TelaPrincipalEventosView: UIView, CodableView {
         self.stackViewTitulo.axis = .vertical
         self.stackViewTitulo.spacing = 8
         
+        self.loading.style = .large
+        self.loading.backgroundColor = .white
+        
         self.tableView.backgroundColor = .clear
         self.tableView.separatorStyle = .none
     }
@@ -60,6 +67,7 @@ class TelaPrincipalEventosView: UIView, CodableView {
         self.addSubview(view)
         self.addSubview(stackViewTitulo)
         self.addSubview(tableView)
+        self.addSubview(loading)
 
     }
     
@@ -75,6 +83,11 @@ class TelaPrincipalEventosView: UIView, CodableView {
             make.leading.trailing.equalToSuperview().inset(16.0)
         }
         
+        self.loading.snp.makeConstraints { make in
+            make.height.width.equalTo(100.0)
+            make.centerX.centerY.equalToSuperview()
+        }
+        
         self.tableView.snp.makeConstraints { (make) in
             make.top.equalTo(stackViewTitulo.snp.bottom).offset(24.0)
             make.leading.trailing.equalToSuperview()
@@ -82,5 +95,20 @@ class TelaPrincipalEventosView: UIView, CodableView {
         }
     }
     
+    func iniciaCarregamento(_ isLoading: Bool) {
+        isLoading ? showLoading() : hideLoading()
+    }
     
+    func showLoading() {
+        loading.startAnimating()
+        loading.isHidden = false
+    }
+    
+    func hideLoading() {
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+            self.loading.isHidden = true
+        }
+    }
+
 }

@@ -8,12 +8,14 @@
 import Foundation
 
 protocol ServiceEventoOutput {
+    func iniciaCarregamento(_ isLoading: Bool)
     func retornaSucessoEventos(resposta: [BodyResponseEvento])
     func retornaSucessoEvento(resposta: BodyResponseEvento)
     func retornaSucessoCheckin(resposta: BodyCheckinRequest)
 }
 
 extension ServiceEventoOutput {
+    func iniciaCarregamento(_ isLoading: Bool){}
     func retornaSucessoEventos(resposta: [BodyResponseEvento]){}
     func retornaSucessoEvento(resposta: BodyResponseEvento){}
     func retornaSucessoCheckin(resposta: BodyCheckinRequest){}

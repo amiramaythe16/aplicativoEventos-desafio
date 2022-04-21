@@ -63,6 +63,10 @@ extension TelaDetalheEventoViewController: ServiceEventoOutput {
             self.telaDetalheView.tableView.reloadData()
         }
     }
+    
+    func iniciaCarregamento(_ isLoading: Bool) {
+        self.telaDetalheView.iniciaCarregamento(isLoading)
+    }
 }
 
 extension TelaDetalheEventoViewController: UITableViewDelegate, UITableViewDataSource {
