@@ -73,9 +73,9 @@ class TelaPrincipalEventosView: UIView, CodableView {
     
     func setupConstraints() {
         self.view.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(16.0)
+            make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50.0)
+            make.height.equalTo(80.0)
         }
         
         self.stackViewTitulo.snp.makeConstraints { make in

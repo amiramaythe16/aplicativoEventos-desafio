@@ -80,6 +80,8 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.imagem.clipsToBounds = true
         self.imagem.contentMode = .scaleToFill
         self.imagem.backgroundColor = UIColor(hex: "005CA9")
+        self.imagem.isUserInteractionEnabled = true
+        self.imagem.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:))))
         
         self.titulo.font = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.bold)
         self.titulo.textColor = UIColor(hex: "005CA9")
@@ -137,13 +139,13 @@ class TelaDetalheEventoView: UIView, CodableView {
     
     func setupConstraints() {
         self.imagem.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(80.0)
+            make.top.equalTo(safeAreaLayoutGuide.snp.topMargin).inset(16.0)
             make.leading.equalToSuperview().inset(16.0)
             make.width.height.equalTo(100.0)
         }
         
         self.stackViewDetalhe.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(80.0)
+            make.top.equalTo(imagem.snp.top)
             make.leading.equalTo(imagem.snp.trailing).offset(16.0)
             make.trailing.equalToSuperview().inset(16.0)
         }
@@ -171,6 +173,23 @@ class TelaDetalheEventoView: UIView, CodableView {
         self.botaoCompartilhar.snp.makeConstraints { make in
             make.height.equalTo(32.0)
         }
+    }
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let imageView = tapGestureRecognizer.view as! UIImageView
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.frame = UIScreen.main.bounds
+        newImageView.backgroundColor = UIColor(hex: "005CA9")
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissFullscreenImage(_:)))
+        newImageView.addGestureRecognizer(tap)
+        self.addSubview(newImageView)
+    
+    }
+
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
     }
     
     @objc func botaoCheckinPressionado(){

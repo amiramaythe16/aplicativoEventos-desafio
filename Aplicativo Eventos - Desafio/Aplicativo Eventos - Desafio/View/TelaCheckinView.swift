@@ -107,7 +107,7 @@ class TelaCheckinView: UIView, CodableView {
     
     func setupConstraints() {
         self.stackViewTitulo.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(80.0)
+            make.top.equalTo(safeAreaLayoutGuide.snp.topMargin).inset(16.0)
             make.leading.trailing.equalToSuperview().inset(16.0)
         }
         
