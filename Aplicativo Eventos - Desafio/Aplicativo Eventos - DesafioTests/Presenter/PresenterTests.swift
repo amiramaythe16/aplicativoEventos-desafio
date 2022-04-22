@@ -35,4 +35,10 @@ class PresenterTests: XCTestCase {
         XCTAssertEqual(self.mockOutput.didCallMethods, [.iniciaCarregamento])
         XCTAssertEqual(self.mockService.didCallMethods, [.getEventoPassandoID])
     }
+    
+    func test_EfetivaCheckin_Sucesso() {
+        self.sut.efetivaCheckin(idEvento: "1", nomeUsuario: "Amira", emailUsuario: "amira@gmail.com")
+        XCTAssertEqual(self.mockOutput.didCallMethods, [.iniciaCarregamento])
+        XCTAssertEqual(self.mockService.didCallMethods, [.postCheckin])
+    }
 }
